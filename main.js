@@ -1,16 +1,24 @@
-const {app, BrowserWindow,ipcMain } = require('electron');
-const path = require('path');
+const {app, BrowserWindow,ipcMain,Menu } = require('electron');
+const nunjucks = require('nunjucks');
+const {createWriteStream} = require('fs')
 
+// const menu = Menu.buildFromTemplate([])
+// Menu.setApplicationMenu(menu)
+const path = require('path');
+let algo ='dfs';
 const createWindow = ()=> {
     const win = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
-        }
+        },
     });
-    ipcMain.handle('ping',()=>'pong')
-    win.loadFile('index.html');
+    // ipcMain.handle('ping',()=>'pong')
+    const res = nunjucks.render('vews/index.njk',{name:'Luis'})
+    let writer = createWriteStream('vews/index.html'); 
+    writer.write(res);
+    win.loadFile('vews/index.html');
 };
 
 app.whenReady().then(() => {

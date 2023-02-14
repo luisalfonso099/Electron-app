@@ -1,0 +1,16 @@
+body {
+    background-color: antiquewhite;
+}
+.dd-container {
+    float: left;
+    min-height: 70px;
+    min-width: 50px;
+    border: 2px green solid;
+    margin: 10px 10px;
+  }
+  .dd-container > div {
+    padding: 5px;
+    border: 2px blue solid;
+    margin: 5px 5px;
+    cursor: pointer;
+  }
